@@ -9,8 +9,12 @@ Content-Type: text/html
 <title>WOW</title>
 </head>
 <html>
-<p>Wow, Python serveqr</p>
+<p>Wow, Python server</p>
 <image src='./test.png'/>
+<form name="input" action="/" method="post">
+First name:<input type="text" name="firstname"><br>
+<input type="submit" value="submit"> 
+</form>
 </html>
 """
 
@@ -30,11 +34,13 @@ s.bind((HOST, PORT))
 while True:
     s.listen(3)
     conn, addr = s.accept()
-    request = conn.recv(1024)
-    request = request.decode("ascii")
+    request = conn.recv(1024).decode("ascii")
 
     method = request.split(" ")[0]
     src = request.split(" ")[1]
+
+    print("connected by ", addr)
+    print("requests is ", request)
 
     if method == "GET":
 
@@ -44,8 +50,13 @@ while True:
             content = text
         conn.sendall(content)
 
-        print("connected by ", addr)
-        print("requests is ", request)
+    if method == "POST":
+        form = request.split("\r\n")
+        idx = form.index("")
+        entry = form[idx:]
+
+        value = entry[-1].split("=")[-1]
+        conn.sendall(text + b"\n<p>" + value.encode('ascii') + b"</p>")
 
     conn.close()
 
