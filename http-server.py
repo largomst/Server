@@ -9,7 +9,8 @@ Content-Type: text/html
 <title>WOW</title>
 </head>
 <html>
-<p>Wow, Python server</p>
+<p>Wow, Python serveqr</p>
+<image src='./test.png'/>
 </html>
 """
 
