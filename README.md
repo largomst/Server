@@ -6,7 +6,7 @@ socket 是进程之间通讯的一种方式，功能和 Linux 的 PIPE 管道流
 
 socket 是建立在 TCP/IP 协议的基础之上的，需要 ip 和 port 分别定位到计算机和计算机上的进程。
 
-socket 通过 listen 等待请求，通过 accept 接受请求，通过 connect 建立连接。
+使用 socket 需要设置 scoket 的类型，然后用 bind() 绑定端口，通过 listen() 等待请求，通过 accept() 接受请求，客户端通过 connect() 建立与另一个 socket 的连接。
 
 HTTP 协议以**请求-回应**的方式使用 TCP socket。即客户端向服务端发送请求， 服务端接受请求后发送回应。每次请求-回应使用一个 socket。
 
